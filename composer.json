@@ -1,12 +1,12 @@
 {
-    "name": "Soleo/UrlShortener",
+    "name": "soleo/url-shortener",
     "type": "library",
     "description": "Make the URLs shorter",
     "keywords": [
         "Soleo",
         "UrlShortener"
     ],
-    "homepage": "https://github.com/Soleo/UrlShortener",
+    "homepage": "https://github.com/soleo/url-shortener",
     "license": "MIT",
     "authors": [
         {
