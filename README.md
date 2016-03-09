@@ -58,7 +58,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/Soleo/UrlShortener.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/Soleo/UrlShortener
-[link-travis]: https://travis-ci.org/Soleo/UrlShortener
+[link-travis]: https://travis-ci.org/soleo/UrlShortener
 [link-scrutinizer]: https://scrutinizer-ci.com/g/Soleo/UrlShortener/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/Soleo/UrlShortener
 [link-downloads]: https://packagist.org/packages/Soleo/UrlShortener
