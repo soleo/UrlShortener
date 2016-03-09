@@ -1,6 +1,6 @@
 <?php
 
-namespace PrepHero\UrlShortener;
+namespace Soleo\UrlShortener;
 
 class SkeletonClass
 {

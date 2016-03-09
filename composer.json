@@ -1,12 +1,12 @@
 {
-    "name": "PrepHero/UrlShortener",
+    "name": "Soleo/UrlShortener",
     "type": "library",
     "description": "Make the URLs shorter",
     "keywords": [
-        "PrepHero",
+        "Soleo",
         "UrlShortener"
     ],
-    "homepage": "https://github.com/PrepHero/UrlShortener",
+    "homepage": "https://github.com/Soleo/UrlShortener",
     "license": "MIT",
     "authors": [
         {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PrepHero\\UrlShortener\\": "src"
+            "Soleo\\UrlShortener\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PrepHero\\UrlShortener\\": "tests"
+            "Soleo\\UrlShortener\\": "tests"
         }
     },
     "scripts": {
