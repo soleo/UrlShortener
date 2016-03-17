@@ -64,7 +64,7 @@ class MongoConnection implements ConnectionInterface
         $c_db = $this->DB;
         $c_table = $c_db->selectCollection("url_table");
 
-        $c_table->insert(array("shorturl" => $slug, "longurl" => $longUrl));
+        $c_table->insertOne(array("shorturl" => $slug, "longurl" => $longUrl));
         return $slug;
     }
 
@@ -77,14 +77,23 @@ class MongoConnection implements ConnectionInterface
 
         $c_inc = $this->DB->selectCollection($collection_name);
         $c_inc->createIndex(array($unique_field => 1), array('unique' => true));
-        $ret = $this->DB->command(array(
-                "findandmodify" => "increment_id",
-                "query" => array($unique_field => $data_field),
-                "update" => array('$inc' => array($data_field => 1)),
-                "upsert" => true
-                ));
-        if ($ret && $ret['value'] && $ret['value'][$data_field]) {
-            return $ret['value'][$data_field];
+        try {
+            $ret = $c_inc->findOneAndUpdate(
+                [ $unique_field => $data_field ],
+                [ '$inc' => [$data_field => 1] ],
+                [ "upsert" => true ]
+            );
+            if ($ret && $ret->$data_field) {
+                return $ret->$data_field;
+            }
+        } catch (Exception $e) {
+            return false;
         }
+    }
+
+    public function cleanDB()
+    {
+        $this->DB->selectCollection("url_table")->drop();
+        $this->DB->selectCollection("increment_id")->drop();
     }
 }

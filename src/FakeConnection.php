@@ -8,7 +8,7 @@ class FakeConnection implements ConnectionInterface
     public function __construct($config = null)
     {
         $this->fakeDB = [
-            'A9A' => 'https://example.com'
+            '99A' => 'https://example.com'
         ];
     }
 
@@ -31,5 +31,9 @@ class FakeConnection implements ConnectionInterface
     public function getIncrementUid()
     {
         return 1;
+    }
+
+    public function cleanDB()
+    {
     }
 }

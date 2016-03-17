@@ -18,28 +18,25 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-    }
-
-    public function testShortURLConvertToLongURL()
-    {
-        $shortURL = "A9A";
         $mongoURI = "mongodb://demo:demodemo@ds045757.mlab.com:45757/url_shortener";
         $mongoConn = new MongoConnection($mongoURI);
         $this->conn = $mongoConn;
-        $shorty = new Shorty($this->conn);
-        $longURL = $shorty->getLongURL($shortURL);
-        $this->assertEquals('https://example.com', $longURL);
     }
 
     public function testLongURLConvertToShortURL()
     {
         $longURL = "https://example.com";
-        $mongoURI = "mongodb://demo:demodemo@ds045757.mlab.com:45757/url_shortener";
-        $mongoConn = new MongoConnection($mongoURI);
-        $this->conn = $mongoConn;
         $shorty = new Shorty($this->conn);
         $shortURL = $shorty->getShortUrl($longURL);
-        $this->assertEquals('http://localhost/A9A', $shortURL);
+        $this->assertEquals('http://localhost/99A', $shortURL);
+    }
+
+    public function testShortURLConvertToLongURL()
+    {
+        $shortURL = "99A";
+        $shorty = new Shorty($this->conn);
+        $longURL = $shorty->getLongURL($shortURL);
+        $this->assertEquals('https://example.com', $longURL);
     }
 
     public function testWithFakeConnection()
@@ -48,23 +45,23 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
         $fakeConn = new FakeConnection;
         $shorty = new Shorty($fakeConn);
         $shortURL = $shorty->getShortUrl($longURL);
-        $this->assertEquals('http://localhost/A9A', $shortURL);
+        $this->assertEquals('http://localhost/99A', $shortURL);
     }
 
     public function testGetURLsFromMockConnection()
     {
         $longURL = "https://example.com";
         $mockConn = m::mock('Soleo\UrlShortener\MongoConnection');
-        $mockConn->shouldReceive('reverseLookup')->andReturn('A9A');
+        $mockConn->shouldReceive('reverseLookup')->andReturn('99A');
         $mockConn->shouldReceive('lookup')->andReturn('https://example.com');
 
         $shorty = new Shorty($mockConn);
         $this->assertInstanceOf(Shorty::class, $shorty);
 
         $shortURL = $shorty->getShortUrl($longURL);
-        $this->assertEquals('http://localhost/A9A', $shortURL);
+        $this->assertEquals('http://localhost/99A', $shortURL);
 
-        $long = $shorty->getLongUrl('A9A');
+        $long = $shorty->getLongUrl('99A');
         $this->assertEquals('https://example.com', $long);
     }
 

@@ -12,4 +12,6 @@ interface ConnectionInterface
     public function addNewRecord($longUrl, $slug);
 
     public function getIncrementUid();
+
+    public function cleanDB();
 }
