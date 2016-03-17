@@ -9,6 +9,8 @@ use \Mockery as m;
 
 class ShortyTest extends \PHPUnit_Framework_TestCase
 {
+    private $conn;
+
     protected function tearDown()
     {
         m::close();
@@ -23,7 +25,8 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
         $shortURL = "A9A";
         $mongoURI = "mongodb://demo:demodemo@ds045757.mlab.com:45757/url_shortener";
         $mongoConn = new MongoConnection($mongoURI);
-        $shorty = new Shorty($mongoConn);
+        $this->conn = $mongoConn;
+        $shorty = new Shorty($this->conn);
         $longURL = $shorty->getLongURL($shortURL);
         $this->assertEquals('https://example.com', $longURL);
     }
@@ -33,7 +36,8 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
         $longURL = "https://example.com";
         $mongoURI = "mongodb://demo:demodemo@ds045757.mlab.com:45757/url_shortener";
         $mongoConn = new MongoConnection($mongoURI);
-        $shorty = new Shorty($mongoConn);
+        $this->conn = $mongoConn;
+        $shorty = new Shorty($this->conn);
         $shortURL = $shorty->getShortUrl($longURL);
         $this->assertEquals('http://localhost/A9A', $shortURL);
     }

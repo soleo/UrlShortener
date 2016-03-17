@@ -2,29 +2,28 @@
 
 namespace Soleo\UrlShortener;
 
-use \MongoClient;
-
 class MongoConnection implements ConnectionInterface
 {
 
     private $client;
     private $DB;
+
     public function __construct($config)
     {
         $options = array("connectTimeoutMS" => 30000);
-        $this->client = new MongoClient($config, $options);
-        $this->DB = $this->client->selectDB("url_shortener");
+        $this->client = new \MongoDB\Client($config, $options);
+        $this->DB = $this->client->selectDatabase("url_shortener");
     }
 
     public function lookup($slug, $update = false)
     {
         $c_db = $this->DB;
         $c_table = $c_db->selectCollection("url_table");
-        $c_table->ensureIndex(array('shorturl' => 1 ), array('unique' => true));
+        $c_table->createIndex(array('shorturl' => 1 ), array('unique' => true));
         $urls = $c_table->findOne(array('shorturl' => $slug), array('longurl', '_id'));
         if ($urls) {
             if ($update) {
-                $c_table->ensureIndex(array('hits' => 1 ));
+                $c_table->createIndex(array('hits' => 1 ));
                 $c_table->update(array("_id" => $urls['_id']), array('$inc' => array("hits" => 1)));
                 $days = floor(time()/24/3600);
                 $c_table->update(array("_id" => $urls['_id']), array('$inc' => array("hits_d.{$days}" => 1)));
@@ -50,8 +49,8 @@ class MongoConnection implements ConnectionInterface
 
         // check if url already exists
         $c_table = $c_db->selectCollection("url_table");
-        $c_table->ensureIndex(array('longurl' => 1 ), array('unique' => true));
-        $c_table->ensureIndex(array('shorturl' => 1 ), array('unique' => true));
+        $c_table->createIndex(array('longurl' => 1 ), array('unique' => true));
+        $c_table->createIndex(array('shorturl' => 1 ), array('unique' => true));
         $shorturl = $c_table->findOne(array('longurl' => $longUrl), array('shorturl'));
         if ($shorturl && $shorturl['shorturl']) {
             return $shorturl['shorturl'];
@@ -77,7 +76,7 @@ class MongoConnection implements ConnectionInterface
         $data_field = 'url_id';
 
         $c_inc = $this->DB->selectCollection($collection_name);
-        $c_inc->ensureIndex(array($unique_field => 1), array('unique' => true));
+        $c_inc->createIndex(array($unique_field => 1), array('unique' => true));
         $ret = $this->DB->command(array(
                 "findandmodify" => "increment_id",
                 "query" => array($unique_field => $data_field),
