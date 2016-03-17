@@ -1,5 +1,5 @@
 <?php
-use Soleo\UrlShortener;
+
 use Soleo\UrlShortener\MongoConnection;
 use Soleo\UrlShortener\Shorty;
 
