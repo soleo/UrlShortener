@@ -26,7 +26,7 @@ class Shorty
             return $fullURL.$slug;
         } else {
             // add new records to DB
-            $slug = $this->generateId($longURL);
+            $slug = $this->generateId();
             $this->conn->addNewRecord($longURL, $slug);
             return $fullURL.$slug;
         }
