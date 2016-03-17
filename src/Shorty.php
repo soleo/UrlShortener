@@ -27,7 +27,6 @@ class Shorty
         } else {
             // add new records to DB
             $slug = $this->generateId($longURL);
-            var_dump($slug);
             $this->conn->addNewRecord($longURL, $slug);
             return $fullURL.$slug;
         }
@@ -36,14 +35,12 @@ class Shorty
     public function getLongUrl($slug)
     {
         // filter out invalid string
-       $slug = preg_replace('[^A_Za_z0-9]', '', $slug);
-
+        $slug = preg_replace('[^A_Za_z0-9]', '', $slug);
         $longURL = $this->conn->lookup($slug);
-
         return $longURL;
     }
 
-    private function generateId($longURL)
+    private function generateId()
     {
         $url_num_id = $this->conn->getIncrementUid();
         $slug = $this->alphaID($url_num_id);
@@ -73,7 +70,7 @@ class Shorty
                 $p[] =  substr($passhash, $n, 1);
             }
 
-            array_multisort($p,  SORT_DESC, $i);
+            array_multisort($p, SORT_DESC, $i);
             $index = implode($i);
         }
 

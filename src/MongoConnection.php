@@ -78,8 +78,12 @@ class MongoConnection implements ConnectionInterface
 
         $c_inc = $this->DB->selectCollection($collection_name);
         $c_inc->ensureIndex(array($unique_field => 1), array('unique' => true));
-        $ret = $this->DB->command(array("findandmodify" => "increment_id", "query" => array($unique_field => $data_field),
-                                                  "update" => array('$inc' => array($data_field => 1)), "upsert" => true ));
+        $ret = $this->DB->command(array(
+                "findandmodify" => "increment_id",
+                "query" => array($unique_field => $data_field),
+                "update" => array('$inc' => array($data_field => 1)),
+                "upsert" => true
+                ));
         if ($ret && $ret['value'] && $ret['value'][$data_field]) {
             return $ret['value'][$data_field];
         }
