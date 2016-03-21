@@ -17,6 +17,7 @@ class Shorty
         if (strlen($longURL) <= 3) {
             throw new \InvalidArgumentException("URL is malformated!");
         }
+
         $currentDomain = "localhost";
         // Lookup
         $slug = $this->conn->reverseLookup($longURL);

@@ -4,9 +4,11 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![StyleCI][ico-styleci]][link-styleci]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+A Simple, Self-Hosted URL Shortener with MongoDB. 
 
 ## Install
 
@@ -71,6 +73,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/soleo/url-shortener.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/soleo/url-shortener.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/soleo/url-shortener.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/32484055/shield
 
 [link-packagist]: https://packagist.org/packages/soleo/url-shortener
 [link-travis]: https://travis-ci.org/soleo/url-shortener
@@ -79,3 +82,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/soleo/url-shortener
 [link-author]: https://github.com/soleo
 [link-contributors]: ../../contributors
+[link-styleci]: https://styleci.io/repos/32484055

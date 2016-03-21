@@ -86,7 +86,7 @@ class MongoConnection implements ConnectionInterface
             if ($ret && $ret->$data_field) {
                 return $ret->$data_field;
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }

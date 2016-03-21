@@ -3,8 +3,11 @@
     "type": "library",
     "description": "Make the URLs shorter",
     "keywords": [
-        "Soleo",
-        "UrlShortener"
+        "mongodb",
+        "url-shortener",
+        "soleo",
+        "URL",
+        "short"
     ],
     "homepage": "https://github.com/soleo/url-shortener",
     "license": "MIT",
@@ -24,7 +27,8 @@
         "phpunit/phpunit" : "4.*",
         "scrutinizer/ocular": "~1.1",
         "squizlabs/php_codesniffer": "~2.3",
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "^0.9.4",
+        "heroku/heroku-buildpack-php": "^97.0"
     },
     "autoload": {
         "psr-4": {
