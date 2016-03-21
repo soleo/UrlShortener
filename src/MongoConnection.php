@@ -36,7 +36,6 @@ class MongoConnection implements ConnectionInterface
 
     public function reverseLookup($longUrl)
     {
-        // If stored, return the slug, otherwise, return false
         /*
          * mongodb
          * {

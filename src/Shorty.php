@@ -33,11 +33,11 @@ class Shorty
         }
     }
 
-    public function getLongUrl($slug)
+    public function getLongUrl($slug, $update = false)
     {
         // filter out invalid string
         $slug = preg_replace('[^A_Za_z0-9]', '', $slug);
-        $longURL = $this->conn->lookup($slug);
+        $longURL = $this->conn->lookup($slug, $update);
         return $longURL;
     }
 
@@ -51,6 +51,8 @@ class Shorty
     private function alphaID($in, $to_num = false, $pad_up = 3, $passKey = "prephe.ro")
     {
         $index = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $i = [];
+        $p = [];
         if ($passKey !== null) {
             // Although this function's purpose is to just make the
             // ID short - and not so much secure,

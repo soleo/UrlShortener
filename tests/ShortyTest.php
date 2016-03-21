@@ -27,6 +27,7 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
     {
         $longURL = "https://example.com";
         $shorty = new Shorty($this->conn);
+        $this->assertInstanceOf(Shorty::class, $shorty);
         $shortURL = $shorty->getShortUrl($longURL);
         $this->assertEquals('http://localhost/99A', $shortURL);
     }
@@ -35,17 +36,9 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
     {
         $shortURL = "99A";
         $shorty = new Shorty($this->conn);
+        $this->assertInstanceOf(Shorty::class, $shorty);
         $longURL = $shorty->getLongURL($shortURL);
         $this->assertEquals('https://example.com', $longURL);
-    }
-
-    public function testWithFakeConnection()
-    {
-        $longURL = "https://example.com";
-        $fakeConn = new FakeConnection;
-        $shorty = new Shorty($fakeConn);
-        $shortURL = $shorty->getShortUrl($longURL);
-        $this->assertEquals('http://localhost/99A', $shortURL);
     }
 
     public function testGetURLsFromMockConnection()
@@ -63,6 +56,15 @@ class ShortyTest extends \PHPUnit_Framework_TestCase
 
         $long = $shorty->getLongUrl('99A');
         $this->assertEquals('https://example.com', $long);
+    }
+
+    public function testCreateShortURLForLongURL()
+    {
+        $longURL = "https://example.com/".uniqid();
+        $shorty = new Shorty($this->conn);
+        $this->assertInstanceOf(Shorty::class, $shorty);
+        $shortURL = $shorty->getShortUrl($longURL);
+        $this->assertStringStartsWith('http://localhost/', $shortURL);
     }
 
     /**
