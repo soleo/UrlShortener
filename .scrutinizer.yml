@@ -23,6 +23,9 @@ tools:
         runs: 3
 
 build:
+    dependencies:
+        before:
+            - pecl install mongodb
     tests:
         override:
             -
